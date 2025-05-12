@@ -92,10 +92,14 @@ db.initialize(process.env.MONGODB_CONN_STRING)
   .then(() => {
     console.log("Database initialized");
     app.listen(HTTP_PORT, () => {
-      console.log(`server listening on: ${HTTP_PORT}`);
-      module.exports = app; // Export the app for Vercel
+      // vercel is serverless, so we don't need to log the port
+      // console.log(`server listening on: ${HTTP_PORT}`);
     });
   })
   .catch((err) => {
     console.log(err);
   });
+
+module.exports = (req, res) => {
+  app(req, res); // Use the express app to handle the request
+};
