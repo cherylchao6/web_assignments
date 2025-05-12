@@ -52,6 +52,60 @@ initializeDatabase().then(() => {
       });
   });
 
+  app.post("/api/sites", (req, res) => {
+    db.addNewSite(req.body)
+      .then((data) => {
+        res.status(201).json(data);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  app.get("/api/sites/:id", (req, res) => {
+    db.getSiteById(req.params.id)
+      .then((data) => {
+        if (data) {
+          res.json(data);
+        } else {
+          res.status(404).json({ error: "Site not found" });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  app.put("/api/sites/:id", (req, res) => {
+    db.updateSiteById(req.body, req.params.id)
+      .then((data) => {
+        if (data) {
+          res.json({
+            message: `Site with id ${req.params.id} updated successfully`,
+          });
+        } else {
+          res.status(404).json({ error: "Site not found" });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  app.delete("/api/sites/:id", (req, res) => {
+    db.deleteSiteById(req.params.id)
+      .then((data) => {
+        if (data) {
+          res.status(204).end();
+        } else {
+          res.status(404).json({ error: "Site not found" });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
   // Export the handler for Vercel to invoke
   module.exports = async (req, res) => {
     console.log("Handler invoked"); // Log every time the function is invoked
