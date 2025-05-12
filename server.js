@@ -1,3 +1,17 @@
+/********************************************************************************
+ * WEB422 – Assignment 1
+ *
+ * I declare that this assignment is my own work in accordance with Seneca's
+ * Academic Integrity Policy:
+ *
+ * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+ *
+ * Name: Tzu Han Chao Student ID: 151593225 Date: 2025/05/12
+ *
+ * Published URL on Vercel:
+ *
+ ********************************************************************************/
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -30,7 +44,8 @@ app.get("/api/sites", (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      res.status(500).json({ error: err.message });
+      console.error("Error fetching sites:", err); // Log the error
+      res.status(500).json({ error: "Failed to fetch sites" }); // Respond with a clear error message
     });
 });
 
@@ -91,13 +106,13 @@ app.delete("/api/sites/:id", (req, res) => {
 db.initialize(process.env.MONGODB_CONN_STRING)
   .then(() => {
     console.log("Database initialized");
-    app.listen(HTTP_PORT, () => {
-      // vercel is serverless, so we don't need to log the port
-      // console.log(`server listening on: ${HTTP_PORT}`);
-    });
+    // app.listen(HTTP_PORT, () => {
+    // vercel is serverless, so we don't need to log the port
+    // console.log(`server listening on: ${HTTP_PORT}`);
+    // });
   })
   .catch((err) => {
-    console.log(err);
+    console.error("Database connection error:", err);
   });
 
 module.exports = (req, res) => {
