@@ -109,11 +109,11 @@ db.initialize(process.env.MONGODB_CONN_STRING)
           res.status(500).json({ error: err.message });
         });
     });
-
-    module.exports = (req, res) => {
-      app(req, res); // Use the express app to handle the request
-    };
   })
   .catch((err) => {
     console.error("Database connection error:", err);
   });
+
+module.exports = (req, res) => {
+  app(req, res); // Use the express app to handle the request
+};
