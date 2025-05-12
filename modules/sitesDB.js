@@ -13,6 +13,7 @@ module.exports = class SitesDB {
       const db = mongoose.createConnection(connectionString);
 
       db.on("error", (err) => {
+        console.error("Database connection error:", err);
         reject(err);
       });
       db.once("open", () => {
