@@ -93,6 +93,7 @@ db.initialize(process.env.MONGODB_CONN_STRING)
     console.log("Database initialized");
     app.listen(HTTP_PORT, () => {
       console.log(`server listening on: ${HTTP_PORT}`);
+      module.exports = app; // Export the app for Vercel
     });
   })
   .catch((err) => {
