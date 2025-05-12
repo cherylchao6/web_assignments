@@ -1,3 +1,16 @@
+/********************************************************************************
+ * WEB422 – Assignment 1
+ *
+ * I declare that this assignment is my own work in accordance with Seneca's
+ * Academic Integrity Policy:
+ *
+ * https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html
+ *
+ * Name: Tzu Han Chao Student ID: 151593225 Date: 2025/05/12
+ *
+ * Published URL on Vercel: https://web-assignments-xi.vercel.app/
+ *
+ ********************************************************************************/
 const express = require("express");
 const app = express();
 const cors = require("cors");
